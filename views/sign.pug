@@ -1,0 +1,23 @@
+extends layout
+
+block variables
+  - const PAGE_TITLE = "Sign"
+
+block contenu 
+  h1 Inscription 
+
+  form(action="/signup" method="post")
+    div
+      label(for="firstname") Prenom:
+      input(type="text" name="firstname" id="firstname" required)
+    div
+      label(for="lastname") Nom:
+      input(type="text" name="lastname" id="lastname" required)
+    div
+      label(for="email") Email:
+      input(type="email" name="email" id="email" required)
+    div
+      label(for="password") Password:
+      input(type="password" name="password" id="password" required)
+    div
+      button(type="submit") Sign Up

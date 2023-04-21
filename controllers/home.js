@@ -11,5 +11,5 @@ const PORT = process.env.APP_PORT;
 
 
 export default function home(req, res) {
-  res.sendFile(path.join(__dirname, '..', 'views', 'sign.html'));
+  res.render('sign.pug');
 };
