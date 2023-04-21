@@ -1,10 +1,8 @@
-import { verify } from "argon2";
-
-export default async function login(req, res) {
-  const { login, pass } = req.body;
+export default async function sign(req, res) {
+  const { firstname, lastName, email, pass } = req.body;
 
   try {
-    const user = await getUserByName(login);
+    const user = await getUserByName(login); // query vers db pour check si user existe deja
 
     // console.log(user);
 
@@ -14,7 +12,7 @@ export default async function login(req, res) {
       res.redirect("/dashboard");
     }
     else {
-      res.send("Authentification ratée !");
+      res.send("Inscription ratée !");
     }
   }
   catch (err) {
