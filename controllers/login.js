@@ -1,25 +1,20 @@
 import { verify } from "argon2";
 import { getUserByEmail } from "../data/getUser.js";
 
-
 export default async function login(req, res) {
   const { email, password } = req.body;
 
   try {
-    const user = await getUserByEmail(email) ;
+    const user = await getUserByEmail(email);
 
-    // console.log(user);
-
-    if (user.email === email && await verify(user.password, password)) {
+    if (user.email === email && (await verify(user.password, password))) {
       req.session.isLogged = true;
       req.session.name = login;
       res.redirect("/dashboard");
-    }
-    else {
+    } else {
       res.send("Authentification ratée !");
     }
-  }
-  catch (err) {
+  } catch (err) {
     res.status(500).send(err.message);
   }
-};
+}

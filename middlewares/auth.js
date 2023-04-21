@@ -1,8 +1,7 @@
 export default function isAuthenticated(req, res, next) {
-  if (req.session && req.session.isLogged === true && req.session.name) {
+  if (req.session && req.session.isLogged === true) {
     next();
-    return;
+  } else {
+    res.redirect("/login");
   }
-
-  res.redirect("/dashboard");
 }

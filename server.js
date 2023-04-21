@@ -13,7 +13,7 @@ import route from "./routes/routes.js";
 // ==========
 
 dotenv.config();
-const { APP_HOSTNAME, APP_PORT, NODE_ENV } = process.env;
+const { APP_HOSTNAME, APP_PORT, NODE_ENV, SESSION_SECRET} = process.env;
 
 const app = express();
 
@@ -30,8 +30,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({extended: false}));
 app.use(session({
-  name: 'user',
-  secret: 'big-secret',
+  // name: 'user',
+  secret: SESSION_SECRET, //variable .env 
   resave: true,
   saveUninitialized: true
 }))
