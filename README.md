@@ -1,2 +1,2 @@
 # Auth
-Auth with db (school)
+Little auth poroject for school  
