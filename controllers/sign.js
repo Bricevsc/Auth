@@ -1,21 +1,22 @@
+import { hash } from "argon2";
+import { UsersModel } from "../Models/User.model.js";
+
 export default async function sign(req, res) {
-  const { firstname, lastName, email, pass } = req.body;
+  const { firstname, lastName, email, password } = req.body;
 
   try {
-    const user = await getUserByName(login); // query vers db pour check si user existe deja
-
-    // console.log(user);
-
-    if (user.login === login && await verify(user.password, pass)) {
-      req.session.isLogged = true;
-      req.session.name = login;
-      res.redirect("/dashboard");
+    if (email != await UsersModel.findOne({ email: email })) {
+      await UsersModel.create({
+        firstname: firstname,
+        lastName: lastName,
+        email: email,
+        password: await hash(password),
+      });
+      res.redirect("/login");
+    } else {
+      res.send("Email déjà existant.");
     }
-    else {
-      res.send("Inscription ratée !");
-    }
-  }
-  catch (err) {
+  } catch (err) {
     res.status(500).send(err.message);
   }
-};
+}

@@ -1,14 +1,16 @@
 import { verify } from "argon2";
+import { getUserByEmail } from "../data/getUser.js";
+
 
 export default async function login(req, res) {
-  const { login, pass } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await getUserByName(login);
+    const user = await getUserByEmail(email) ;
 
     // console.log(user);
 
-    if (user.login === login && await verify(user.password, pass)) {
+    if (user.email === email && await verify(user.password, password)) {
       req.session.isLogged = true;
       req.session.name = login;
       res.redirect("/dashboard");

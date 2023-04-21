@@ -4,5 +4,5 @@ export default function isAuthenticated(req, res, next) {
     return;
   }
 
-  res.redirect("/");
+  res.redirect("/dashboard");
 }
